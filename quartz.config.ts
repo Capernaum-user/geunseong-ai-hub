@@ -12,9 +12,10 @@ const config: QuartzConfig = {
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
-    analytics: {
-      provider: "plausible",
-    },
+    // 분석 비활성(null). Plausible은 GH Pages 서브패스(/geunseong-ai-hub/)에서
+    // 도메인 스코프가 어긋나 이벤트가 조용히 0건 수집될 수 있어 보류한다.
+    // 정식 분석 도입 시 plausible.io 사이트 등록 또는 self-host host 명시 후 재설정.
+    analytics: null,
     locale: "ko-KR",
     // GitHub Pages: https://capernaum-user.github.io/geunseong-ai-hub/
     baseUrl: "capernaum-user.github.io/geunseong-ai-hub",

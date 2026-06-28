@@ -75,4 +75,4 @@ summary: "실무에서 실제로 굴리는 AI 에이전트 종류(코딩 에이�
 
 - [[ai-agent-roles]] — 사람·Claude·Gemini·Codex의 역할과 한계
 - [[agent-decision-escalation]] — 자율 vs 에스컬레이션 2구역 모델과 우선순위
-- [[index|AI 에이전트 허브]]
+- [[agents/index|AI 에이전트 허브]]
