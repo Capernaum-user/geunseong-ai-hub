@@ -5,6 +5,7 @@ tags:
   - 에이전트
   - visibility/public
   - type/index
+  - has-diagram
 created: 2026-06-28
 updated: 2026-06-28
 draft: false
@@ -18,6 +19,32 @@ summary: "코딩 에이전트·서브에이전트·오케스트레이터·MCP를
 ## 이 허브는 무엇인가
 
 AI 에이전트는 "프롬프트 한 번"이 아니라 **스스로 도구를 쓰고, 일을 나누고, 검증하며 끝까지 처리하는 실행 시스템**이다. 이 허브는 단일 코딩 에이전트부터 여러 에이전트를 묶는 오케스트레이션, 외부 도구를 잇는 MCP까지, 직접 굴려 본 구조와 규칙을 공개 기록으로 남긴다.
+
+## 에이전트 구조 및 유형
+
+```mermaid
+graph LR
+    subgraph 단일["단일 에이전트"]
+        CA[코딩 에이전트]
+        TA[태스크 에이전트]
+    end
+
+    subgraph 다중["다중 에이전트"]
+        OR[오케스트레이터]
+        SA[서브에이전트]
+        OR -->|위임| SA
+    end
+
+    subgraph 연결["도구 연결"]
+        MCP[MCP 서버]
+    end
+
+    CA --> OR
+    TA --> OR
+    OR --> MCP
+    SA --> MCP
+```
+*위 다이어그램은 단일 에이전트, 다중 에이전트 오케스트레이션, 그리고 MCP(Model Context Protocol) 도구 연결의 위계 구조를 나타냅니다.*
 
 ## 하위 노트
 

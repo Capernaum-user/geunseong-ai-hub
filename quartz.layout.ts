@@ -5,7 +5,14 @@ import * as Component from "./quartz/components"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [Component.Nav()],
-  afterBody: [],
+  // 홈(index)에서만 히어로 아래에 허브 카드 그리드(HubGrid)를 렌더한다.
+  // 다른 페이지는 null → page-footer 영역 영향 없음.
+  afterBody: [
+    Component.ConditionalRender({
+      component: Component.HubGrid(),
+      condition: (page) => page.fileData.slug === "index",
+    }),
+  ],
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/jackyzha0/quartz",
@@ -51,7 +58,16 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Explorer(),
   ],
   right: [
-    Component.Graph(),
+    Component.Graph({
+      localGraph: {
+        depth: 2,
+        showTags: true,
+      },
+      globalGraph: {
+        depth: -1,
+        showTags: false,
+      }
+    }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],

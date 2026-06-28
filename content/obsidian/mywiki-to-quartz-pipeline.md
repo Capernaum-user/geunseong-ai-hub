@@ -8,6 +8,7 @@ tags:
   - 생성형AI
   - visibility/public
   - type/reference
+  - has-diagram
 created: 2026-06-28
 updated: 2026-06-28
 draft: false
@@ -28,6 +29,28 @@ summary: "Obsidian 위키(MyWiki)를 단일 진실원으로 두고, visibility/p
 3. **단방향 복사** — 발행 대상 노트를 `content/<hub>/<slug>.md`로 복사한다. **사이트→위키 역기록은 금지**(원본 보존). 파일명은 영문 kebab-case, 본문은 한국어.
 4. **링크·그래프 자동화** — `[[위키링크]]`를 손으로 치환하지 않는다. Quartz가 빌드 시 내부 링크로 해석하고, 끊긴 링크·백링크·그래프 뷰를 자동 생성한다. 위키에서 쓰던 연결 구조가 사이트에서 그대로 탐색 가능해진다.
 5. **빌드·배포** — `npx quartz build`로 정적 산출물을 만들고 정적 호스팅(GitHub Pages / Vercel 등)으로 배포한다.
+
+## 배포 자동화 시퀀스
+
+```mermaid
+sequenceDiagram
+    participant OB as Obsidian Vault
+    participant QZ as Quartz CLI
+    participant GH as GitHub Pages
+
+    OB->>OB: 노트 작성 / 수정
+    OB->>OB: visibility/public 태그 확인
+    OB->>QZ: npx quartz sync (파일 동기화)
+    QZ->>QZ: 마크다운 파싱 + 위키링크 변환
+    QZ->>QZ: Mermaid 렌더링
+    QZ->>QZ: SVG 이미지 복사
+    QZ->>QZ: 그래프 데이터 생성
+    QZ->>GH: git push (빌드 아티팩트)
+    GH->>GH: GitHub Actions 빌드 (선택)
+    GH-->>사용자: 사이트 공개
+```
+*위 시퀀스 다이어그램은 Obsidian Vault에서의 작업 수정부터 로컬 빌드 검증 및 최종 GitHub Pages 공개까지의 파이프라인 단계를 보여줍니다.*
+
 
 ```bash
 # Quartz 빌드 (Git Bash)

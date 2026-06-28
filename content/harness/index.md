@@ -7,6 +7,7 @@ tags:
   - LLM통제
   - visibility/public
   - type/index
+  - has-diagram
 created: 2026-06-28
 updated: 2026-06-28
 draft: false
@@ -28,6 +29,33 @@ summary: "LLM을 신뢰할 수 있는 일꾼으로 만드는 엔지니어링 —
 3. **보안** — 비밀·PII·외부 통신을 어떻게 막는가.
 4. **복구** — 실패를 어떻게 등급화하고 되돌리는가.
 5. **세션 연속성** — 상태 없는(stateless) 세션을 어떻게 이어 붙여 연속된 작업으로 만드는가.
+
+## 하네스 5레이어 구조
+
+```mermaid
+graph TD
+    L1["🏛️ L1. 거버넌스<br/>최상위 규칙 · 우선순위"]
+    L2["📋 L2. 작업 프로토콜<br/>시작→완료 생애주기"]
+    L3["🔒 L3. 보안<br/>비밀 · PII · 경계"]
+    L4["🔄 L4. 복구<br/>P0~P3 등급별 대응"]
+    L5["🔗 L5. 세션 연속성<br/>끊긴 세션 이어붙이기"]
+
+    L1 -->|"모든 레이어에 적용"| L2
+    L1 -->|"모든 레이어에 적용"| L3
+    L1 -->|"모든 레이어에 적용"| L4
+    L1 -->|"모든 레이어에 적용"| L5
+    L2 --> L4
+    L3 --> L4
+    L4 --> L5
+
+    style L1 fill:#1a1a2e,stroke:#7c3aed,color:#fff
+    style L2 fill:#16213e,stroke:#3b82f6,color:#fff
+    style L3 fill:#1a1a2e,stroke:#ef4444,color:#fff
+    style L4 fill:#16213e,stroke:#f59e0b,color:#fff
+    style L5 fill:#1a1a2e,stroke:#10b981,color:#fff
+```
+
+*위 다이어그램은 하네스 5레이어 거버넌스 구조를 시각화한 것입니다. 각 레이어는 상위 규칙의 통제 하에 유기적으로 연결되어 작동합니다.*
 
 아래는 실제로 Claude·Gemini·Codex가 Obsidian Vault를 운영하도록 만든 **Harness Engineering v1** 규칙 집합을, 위 5개 주제로 큐레이션한 것이다.
 

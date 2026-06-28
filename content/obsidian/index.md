@@ -7,6 +7,7 @@ tags:
   - 지식관리
   - visibility/public
   - type/index
+  - has-diagram
 created: 2026-06-28
 updated: 2026-06-28
 draft: false
@@ -24,6 +25,37 @@ Obsidian Vault는 사람만 보는 노트 앱이 아니다. 잘 설계하면 생
 - [[obsidian/obsidian-vault|Obsidian Vault (볼트 루트)]] — 모든 AI의 장기기억이 되는 정규 문서 저장소. 고정 폴더 레이아웃, RAG 시맨틱 인덱스, Drive 미러 구조.
 - [[obsidian/ai-plugins|Obsidian + 생성형 AI 플러그인 스택]] — Copilot · Templater · Smart Connections · Local REST API · Excalidraw와 이를 엮은 자동화 패턴.
 - [[obsidian/mywiki-to-quartz-pipeline|MyWiki→Quartz 발행 파이프라인]] — `visibility/public` 태그가 붙은 노트만 단방향으로 사이트에 내보내는 빌드타임 동기화. `[[위키링크]]`·그래프 자동.
+
+## 발행 게이트 파이프라인
+
+```mermaid
+flowchart LR
+    subgraph Vault["Obsidian Vault (비공개)"]
+        Raw[거친 노트]
+        Plugin[플러그인 + AI 정제]
+        Note[허브 노트]
+        Raw --> Plugin --> Note
+    end
+
+    subgraph Gate["발행 게이트"]
+        Tag{"visibility/public\n태그 확인"}
+    end
+
+    subgraph Web["Quartz 사이트 (공개)"]
+        Build[npx quartz build]
+        Site[정적 사이트]
+        Graph[그래프 뷰]
+        Build --> Site --> Graph
+    end
+
+    Note --> Tag
+    Tag -->|통과| Build
+    Tag -->|차단| Blocked[발행 안 됨]
+
+    style Gate fill:#fff3cd,stroke:#ffc107
+    style Blocked fill:#f8d7da,stroke:#dc3545,color:#721c24
+```
+*위 다이어그램은 비공개 Obsidian Vault의 노트가 public 게이트웨이를 거쳐 Quartz 정적 사이트로 배포되는 단방향 파이프라인의 구조를 나타냅니다.*
 
 ## 큰 그림
 

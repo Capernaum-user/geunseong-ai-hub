@@ -7,6 +7,7 @@ tags:
   - ai-governance
   - visibility/public
   - type/entity
+  - has-diagram
 created: 2026-06-26
 updated: 2026-06-28
 draft: false
@@ -36,6 +37,38 @@ summary: "하네스 안에서 각 에이전트의 역할·책임·한계 — 사
 ## 공통 "혼자 확정 불가"
 
 세 AI 모두 다음을 단독으로 할 수 **없다:** 의료 판단 자동화, 파일 대량 삭제/이동/개명, 자격증명/토큰/키 저장, 외부 배포/발행, 마크다운에 MCP 자격증명 기록. 이는 [[ai-master-constitution|헌법]] 2·3·7조에 대응한다.
+
+## 삼권분립 역할 매트릭스
+
+```mermaid
+classDiagram
+    class Director {
+        +역할: 계획·계약·최종확인
+        +권한: 모든 결정 최종승인
+        +한계: 직접 구현 안 함
+    }
+    class CreatorAgent {
+        +역할: 코드·문서 생성
+        +권한: Zone A 자율실행
+        +한계: 테스트 파일 수정 불가
+    }
+    class TesterAgent {
+        +역할: 독립 검증·QA
+        +권한: 읽기 + 테스트실행
+        +한계: 빌더 코드 수정 불가
+    }
+    class IntegratorAgent {
+        +역할: end-to-end 통합
+        +권한: 전체 파이프라인 실행
+        +한계: 설계 변경 불가
+    }
+
+    Director --> CreatorAgent : 위임
+    Director --> TesterAgent : 독립 검증 요청
+    Director --> IntegratorAgent : 통합 검증 요청
+    CreatorAgent ..> TesterAgent : 결과물 전달 (격리)
+```
+*위 클래스 다이어그램은 기획(Director), 구현(Creator), 검증(Tester) 및 통합(Integrator) 에이전트 간의 엄격한 격리 경계와 상호작용 방식을 나타냅니다.*
 
 ## 역할 충돌 해소
 

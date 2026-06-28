@@ -17,19 +17,9 @@ html:root {
     "Malgun Gothic", system-ui, sans-serif;
 }
 
-// 카테고리 파스텔 (DESIGN)
-:root {
-  --hub-agents: #c9e8dc;
-  --hub-harness: #1b2440;
-  --hub-obsidian: #dad3f2;
-  --hub-local-llm: #cbe3f4;
-  --hub-startup-ai: #dde8ae;
-  --hub-company-intel: #f4caba;
-  --hub-products: #f4d2dd;
-  --hub-projects: #ead9a7;
-  --hub-ai-interior: #f4e7ce;
-  --hub-about: #c7ccd4;
-}
+// 카테고리 파스텔 색은 quartz/hubs.ts(HUBS.color)가 단일 소스다.
+// 각 카드의 좌측 bar 색은 HubGrid 컴포넌트가 인라인 CSS 변수(--bar)로 주입한다.
+// (.hub-card::before { background: var(--bar, ...) } 가 이를 사용)
 
 // ── 홈 히어로 ──────────────────────────────────────────────────────
 .home-hero {
@@ -178,17 +168,7 @@ html:root {
     transform: translateY(-1px);
   }
 
-  // 카테고리별 bar 색
-  &[data-hub="agents"] { --bar: var(--hub-agents); }
-  &[data-hub="harness"] { --bar: var(--hub-harness); }
-  &[data-hub="obsidian"] { --bar: var(--hub-obsidian); }
-  &[data-hub="local-llm"] { --bar: var(--hub-local-llm); }
-  &[data-hub="startup-ai"] { --bar: var(--hub-startup-ai); }
-  &[data-hub="company-intel"] { --bar: var(--hub-company-intel); }
-  &[data-hub="products"] { --bar: var(--hub-products); }
-  &[data-hub="projects"] { --bar: var(--hub-projects); }
-  &[data-hub="ai-interior"] { --bar: var(--hub-ai-interior); }
-  &[data-hub="about"] { --bar: var(--hub-about); }
+  // 카테고리별 bar 색(--bar)은 HubGrid 가 hubs.ts 의 color 로 인라인 주입한다.
 }
 
 @keyframes hub-rise {
@@ -202,17 +182,15 @@ html:root {
   }
 }
 
-// 카드 등장 스태거
-.hub-grid .hub-card:nth-child(1) { animation-delay: 0.02s; }
-.hub-grid .hub-card:nth-child(2) { animation-delay: 0.06s; }
-.hub-grid .hub-card:nth-child(3) { animation-delay: 0.1s; }
-.hub-grid .hub-card:nth-child(4) { animation-delay: 0.14s; }
-.hub-grid .hub-card:nth-child(5) { animation-delay: 0.18s; }
-.hub-grid .hub-card:nth-child(6) { animation-delay: 0.22s; }
-.hub-grid .hub-card:nth-child(7) { animation-delay: 0.26s; }
-.hub-grid .hub-card:nth-child(8) { animation-delay: 0.3s; }
-.hub-grid .hub-card:nth-child(9) { animation-delay: 0.34s; }
-.hub-grid .hub-card:nth-child(10) { animation-delay: 0.38s; }
+// 카드 등장 스태거 — 허브 개수에 자동 대응(@for 루프).
+// 딜레이 공식: 0.02 + (n-1) * 0.04s. n=1..10 은 기존 하드코딩 값과 동일하며,
+// 11번째 이후 카드도 같은 간격으로 자동 stagger 된다(상한만 넉넉히 둠).
+$hub-stagger-max: 24;
+@for $i from 1 through $hub-stagger-max {
+  .hub-grid .hub-card:nth-child(#{$i}) {
+    animation-delay: #{0.02 + ($i - 1) * 0.04}s;
+  }
+}
 
 .home-foot {
   margin-top: 2.5rem;
@@ -224,6 +202,15 @@ html:root {
   a {
     color: var(--secondary);
   }
+}
+
+// ── 홈(index) 전용: 본문 뒤 stray 구분선 숨김 ──────────────────────
+// HubGrid(허브 카드+안내문+구분선)는 page-footer 영역에 렌더되므로,
+// renderPage 가 본문(article=히어로) 바로 뒤에 넣는 <hr/> 가 히어로와 그리드
+// 사이에 보이게 된다. 홈에서만 그 stray <hr/> 를 숨기고(다른 페이지는 그대로),
+// 동일한 구분선은 HubGrid 안내문 아래에서 재현해 기존 홈과 동일하게 만든다.
+body[data-slug="index"] .center > hr {
+  display: none;
 }
 
 // ── 접근성: focus / 모션 축소 ──────────────────────────────────────

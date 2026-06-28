@@ -1,21 +1,7 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { joinSegments, pathToRoot, simplifySlug } from "../util/path"
 import { classNames } from "../util/lang"
-
-type HubLink = { slug: string; label: string }
-
-const HUBS: HubLink[] = [
-  { slug: "agents", label: "에이전트" },
-  { slug: "harness", label: "하네스" },
-  { slug: "obsidian", label: "Obsidian" },
-  { slug: "local-llm", label: "로컬 LLM" },
-  { slug: "startup-ai", label: "창업 × AI" },
-  { slug: "company-intel", label: "회사 인텔" },
-  { slug: "products", label: "제품" },
-  { slug: "projects", label: "프로젝트" },
-  { slug: "ai-interior", label: "인테리어" },
-  { slug: "about", label: "소개" },
-]
+import { HUBS } from "../hubs"
 
 const Nav: QuartzComponent = ({ fileData, displayClass }: QuartzComponentProps) => {
   const base = pathToRoot(fileData.slug!)
@@ -30,7 +16,7 @@ const Nav: QuartzComponent = ({ fileData, displayClass }: QuartzComponentProps) 
             class={active ? "hub-nav-link active" : "hub-nav-link"}
             data-hub={h.slug}
           >
-            {h.label}
+            {h.nav}
           </a>
         )
       })}
