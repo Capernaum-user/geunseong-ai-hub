@@ -38,7 +38,7 @@ flowchart LR
     end
 
     subgraph Gate["발행 게이트"]
-        Tag{"visibility/public\n태그 확인"}
+        Tag{"visibility/public<br/>태그 확인"}
     end
 
     subgraph Web["Quartz 사이트 (공개)"]

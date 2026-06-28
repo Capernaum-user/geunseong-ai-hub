@@ -28,33 +28,31 @@ summary: "Obsidian 위키(MyWiki)를 단일 진실원으로 두고, visibility/p
 2. **발행 게이트** — `tags`에 `visibility/public`이 있는 노트만 사이트로 나간다. `visibility/internal`·`visibility/pii`·무표식은 위키에만 남는다. **`pii`는 어떤 경우에도 발행하지 않는다.** Quartz는 추가로 `draft: true`인 노트를 빌드에서 제외하므로, 발행 노트는 `draft: false`(또는 생략)로 둔다.
 3. **단방향 복사** — 발행 대상 노트를 `content/<hub>/<slug>.md`로 복사한다. **사이트→위키 역기록은 금지**(원본 보존). 파일명은 영문 kebab-case, 본문은 한국어.
 4. **링크·그래프 자동화** — `[[위키링크]]`를 손으로 치환하지 않는다. Quartz가 빌드 시 내부 링크로 해석하고, 끊긴 링크·백링크·그래프 뷰를 자동 생성한다. 위키에서 쓰던 연결 구조가 사이트에서 그대로 탐색 가능해진다.
-5. **빌드·배포** — `npx quartz build`로 정적 산출물을 만들고 정적 호스팅(GitHub Pages / Vercel 등)으로 배포한다.
+5. **빌드·배포** — 로컬에서 `npx quartz build`로 검증한 뒤 `main`에 **git push**하면 **GitHub Actions가 자동으로 빌드·배포**한다(GitHub Pages). 같은 산출물로 다른 정적 호스팅(Vercel 등)도 가능.
 
 ## 배포 자동화 시퀀스
 
 ```mermaid
 sequenceDiagram
-    participant OB as Obsidian Vault
-    participant QZ as Quartz CLI
-    participant GH as GitHub Pages
+    participant OB as Obsidian (content/)
+    participant QZ as Quartz (로컬 미리보기)
+    participant GH as GitHub + Actions
 
-    OB->>OB: 노트 작성 / 수정
-    OB->>OB: visibility/public 태그 확인
-    OB->>QZ: npx quartz sync (파일 동기화)
-    QZ->>QZ: 마크다운 파싱 + 위키링크 변환
-    QZ->>QZ: Mermaid 렌더링
-    QZ->>QZ: SVG 이미지 복사
-    QZ->>QZ: 그래프 데이터 생성
-    QZ->>GH: git push (빌드 아티팩트)
-    GH->>GH: GitHub Actions 빌드 (선택)
-    GH-->>사용자: 사이트 공개
+    OB->>OB: 노트 작성 / 수정 (.md)
+    OB->>OB: visibility/public · draft 여부 확인
+    OB->>QZ: npx quartz build --serve (로컬 미리보기 · 선택)
+    QZ-->>OB: localhost:8080 핫리로드 확인
+    OB->>GH: git push (소스 커밋)
+    GH->>GH: GitHub Actions가 npx quartz build → Pages 배포
+    GH-->>OB: 라이브 사이트 공개
+    Note over QZ,GH: 마크다운 파싱·위키링크·그래프는 빌드 시 처리,<br/>Mermaid 다이어그램은 브라우저에서 렌더
 ```
-*위 시퀀스 다이어그램은 Obsidian Vault에서의 작업 수정부터 로컬 빌드 검증 및 최종 GitHub Pages 공개까지의 파이프라인 단계를 보여줍니다.*
+*위 시퀀스 다이어그램은 노트 수정 → (선택) 로컬 미리보기 → `git push` → GitHub Actions 자동 빌드·배포까지의 단계를 보여줍니다. 실제 발행 트리거는 `main` 브랜치 push다.*
 
 
 ```bash
 # Quartz 빌드 (Git Bash)
-cd /d/01_Projects/13_quartz-mywiki-site && npx quartz build
+cd <repo-root> && npx quartz build
 ```
 
 ## 원칙
