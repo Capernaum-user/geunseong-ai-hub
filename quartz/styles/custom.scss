@@ -1,0 +1,245 @@
+@use "./base.scss";
+
+// ── Pretendard (CDN) ───────────────────────────────────────────────
+// 본문/헤더 폰트. theme.typography 의 Google 폰트는 OG 이미지 생성 호환용이며,
+// 실제 화면 표시는 아래에서 Pretendard 로 오버라이드한다.
+// (@font-face 로딩은 quartz/components/Head.tsx 의 CDN <link> 가 담당한다.
+//  custom.scss 의 @import 는 빌드 시 concat 위치 문제로 lightningcss 에서 거부됨.)
+
+// `html:root` 는 specificity(0,1,1) 로, joinStyles 가 뒤에 붙이는 theme `:root`
+// (0,1,0) 블록을 이긴다 → 폰트 변수 오버라이드가 확실히 적용된다.
+html:root {
+  --bodyFont:
+    "Pretendard", "Pretendard Variable", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", system-ui, sans-serif;
+  --headerFont:
+    "Pretendard", "Pretendard Variable", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", system-ui, sans-serif;
+}
+
+// 카테고리 파스텔 (DESIGN)
+:root {
+  --hub-agents: #c9e8dc;
+  --hub-harness: #1b2440;
+  --hub-obsidian: #dad3f2;
+  --hub-local-llm: #cbe3f4;
+  --hub-startup-ai: #dde8ae;
+  --hub-company-intel: #f4caba;
+  --hub-products: #f4d2dd;
+  --hub-projects: #ead9a7;
+  --hub-ai-interior: #f4e7ce;
+  --hub-about: #c7ccd4;
+}
+
+// ── 홈 히어로 ──────────────────────────────────────────────────────
+.home-hero {
+  margin: 0.5rem 0 2.75rem;
+
+  .eyebrow {
+    font-family: var(--codeFont);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin: 0 0 1rem;
+  }
+
+  h1 {
+    font-family: var(--headerFont);
+    font-weight: 800;
+    font-size: clamp(2rem, 5.2vw, 3.25rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    margin: 0 0 1.1rem;
+  }
+
+  .hl {
+    background: linear-gradient(transparent 58%, var(--highlight) 58%);
+    padding: 0 0.15em;
+    border-radius: 2px;
+  }
+
+  .lead {
+    font-size: clamp(1.02rem, 1.9vw, 1.22rem);
+    line-height: 1.7;
+    color: var(--darkgray);
+    max-width: 46ch;
+    margin: 0 0 1.6rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero-meta .chip {
+    font-family: var(--codeFont);
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+    color: var(--darkgray);
+    background: color-mix(in srgb, var(--secondary) 9%, transparent);
+    border: 1px solid var(--lightgray);
+    border-radius: 999px;
+    padding: 0.28rem 0.7rem;
+    white-space: nowrap;
+  }
+}
+
+// ── 허브 그리드 ────────────────────────────────────────────────────
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+  gap: 0.9rem;
+  margin: 1.5rem 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.hub-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.32rem;
+  padding: 1.15rem 1.2rem 1.2rem 1.45rem;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--darkgray);
+  font-weight: 400;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+  animation: hub-rise 0.5s ease both;
+
+  // 좌측 컬러 bar
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 5px;
+    background: var(--bar, var(--secondary));
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--dark) 45%, transparent);
+    border-color: color-mix(in srgb, var(--bar, var(--secondary)) 55%, var(--lightgray));
+    color: var(--darkgray);
+  }
+
+  .hub-num {
+    font-family: var(--codeFont);
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+  }
+
+  .hub-ko {
+    font-family: var(--headerFont);
+    font-weight: 700;
+    font-size: 1.12rem;
+    color: var(--dark);
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+  }
+
+  .hub-en {
+    font-family: var(--codeFont);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .hub-desc {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--darkgray);
+    margin-top: 0.15rem;
+  }
+
+  .hub-tag {
+    font-family: var(--codeFont);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: var(--gray);
+    border: 1px solid var(--lightgray);
+    border-radius: 999px;
+    padding: 0.02rem 0.4rem;
+    transform: translateY(-1px);
+  }
+
+  // 카테고리별 bar 색
+  &[data-hub="agents"] { --bar: var(--hub-agents); }
+  &[data-hub="harness"] { --bar: var(--hub-harness); }
+  &[data-hub="obsidian"] { --bar: var(--hub-obsidian); }
+  &[data-hub="local-llm"] { --bar: var(--hub-local-llm); }
+  &[data-hub="startup-ai"] { --bar: var(--hub-startup-ai); }
+  &[data-hub="company-intel"] { --bar: var(--hub-company-intel); }
+  &[data-hub="products"] { --bar: var(--hub-products); }
+  &[data-hub="projects"] { --bar: var(--hub-projects); }
+  &[data-hub="ai-interior"] { --bar: var(--hub-ai-interior); }
+  &[data-hub="about"] { --bar: var(--hub-about); }
+}
+
+@keyframes hub-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 카드 등장 스태거
+.hub-grid .hub-card:nth-child(1) { animation-delay: 0.02s; }
+.hub-grid .hub-card:nth-child(2) { animation-delay: 0.06s; }
+.hub-grid .hub-card:nth-child(3) { animation-delay: 0.1s; }
+.hub-grid .hub-card:nth-child(4) { animation-delay: 0.14s; }
+.hub-grid .hub-card:nth-child(5) { animation-delay: 0.18s; }
+.hub-grid .hub-card:nth-child(6) { animation-delay: 0.22s; }
+.hub-grid .hub-card:nth-child(7) { animation-delay: 0.26s; }
+.hub-grid .hub-card:nth-child(8) { animation-delay: 0.3s; }
+.hub-grid .hub-card:nth-child(9) { animation-delay: 0.34s; }
+.hub-grid .hub-card:nth-child(10) { animation-delay: 0.38s; }
+
+.home-foot {
+  margin-top: 2.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--lightgray);
+  font-size: 0.92rem;
+  color: var(--gray);
+
+  a {
+    color: var(--secondary);
+  }
+}
+
+// ── 접근성: focus / 모션 축소 ──────────────────────────────────────
+a:focus-visible,
+.hub-card:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub-card {
+    animation: none;
+    transition: none;
+  }
+  .hub-card:hover {
+    transform: none;
+  }
+}
