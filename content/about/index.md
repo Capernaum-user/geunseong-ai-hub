@@ -5,6 +5,7 @@ tags:
   - visibility/public
   - type/about
   - 소개
+  - has-diagram
 created: 2026-06-28
 updated: 2026-06-28
 draft: false
@@ -14,6 +15,17 @@ summary: "근성쌤(권태향) — AI를 다루는 사람. 이 공개 지식정�
 # 소개
 
 안녕하세요. **근성쌤(권태향)** 입니다. 저는 *AI를 잘 쓰는 사람*이 아니라 **AI를 다루는 사람**이 되려고 합니다. 하네스 엔지니어이자 창업가로서, 모델 하나를 똑똑하게 만드는 일보다 **여러 AI를 규칙·역할·검증으로 묶어 안정적으로 일하게 만드는 구조(harness)** 를 설계하는 데 관심이 있습니다.
+
+## 쉽게 말하면
+
+> **한마디로:** 여기는 광고용 블로그가 아니라, 제가 일하며 배운 것을 공개로 쌓는 **지식정원**입니다. 비공개 위키에 쌓은 노트 중 "공개" 도장을 받은 것만 이 사이트로 나옵니다.
+
+운영 흐름은 단순합니다 — **기록**해서 **신뢰**가 쌓이고, 그 신뢰로 **강의**하고, 끝에 자연스럽게 **제품**이 있습니다.
+
+```mermaid
+flowchart LR
+    A[기록] --> B[신뢰] --> C[강의] --> D[제품]
+```
 
 ## 이 사이트는 무엇인가
 
@@ -27,15 +39,15 @@ summary: "근성쌤(권태향) — AI를 다루는 사람. 이 공개 지식정�
 
 기록은 다음 아홉 갈래로 정리됩니다.
 
-- **[[agents/index|AI 에이전트]]** — 자율 에이전트의 역할·한계·의사결정·에스컬레이션
-- **[[harness/index|하네스 엔지니어링]]** — 여러 AI를 규칙·검증·핸드오프로 묶는 운영 구조
-- **[[obsidian/index|Obsidian × 생성형 AI]]** — 지식관리와 생성형 AI의 결합, RAG와 장기 기억
-- **[[local-llm/index|로컬 LLM]]** — 로컬에서 돌리는 모델, 프라이버시와 비용
-- **[[startup-ai/index|창업 × AI]]** — 신생 기업 관점에서 AI를 도구로 쓰는 법
-- **[[company-intel/index|회사 인텔]]** — REUEL MASION 및 산업·회사 리서치 기록
-- **[[products/index|제품]]** — Peek, ChannelDock 등 만들고 있는 것들
+- **[[agents-harness/agents/index|AI 에이전트]]** — 자율 에이전트의 역할·한계·의사결정·에스컬레이션
+- **[[agents-harness/harness-intro/index|하네스 엔지니어링]]** — 여러 AI를 규칙·검증·핸드오프로 묶는 운영 구조
+- **[[knowledge/obsidian/index|Obsidian × 생성형 AI]]** — 지식관리와 생성형 AI의 결합, RAG와 장기 기억
+- **[[knowledge/local-llm/index|로컬 LLM]]** — 로컬에서 돌리는 모델, 프라이버시와 비용
+- **[[business/startup-ai/index|창업 × AI]]** — 신생 기업 관점에서 AI를 도구로 쓰는 법
+- **[[business/company-intel/index|회사 인텔]]** — REUEL MASION 및 산업·회사 리서치 기록
+- **[[business/products/index|제품]]** — Peek, ChannelDock 등 만들고 있는 것들
 - **[[projects/index|프로젝트]]** — 직접 만든 것들(데스크톱앱·플러그인·웹/3D·AI 도구)
-- **[[ai-interior/index|AI 인테리어]]** — AI를 활용한 공간·인테리어 실험(비주력)
+- **[[business/ai-interior/index|AI 인테리어]]** — AI를 활용한 공간·인테리어 실험(비주력)
 
 ## 왜 공개하나 — 기록에서 제품까지
 
@@ -44,13 +56,13 @@ summary: "근성쌤(권태향) — AI를 다루는 사람. 이 공개 지식정�
 1. **기록** — 실제로 일하며 배운 것을 공개로 남긴다.
 2. **신뢰** — 공개된 기록이 모여 전문성과 신뢰가 된다.
 3. **강의** — 그 신뢰를 바탕으로 신생 기업·실무자에게 강의로 전한다.
-4. **제품** — 자연스럽게 [[products/index|Peek·ChannelDock]] 같은 제품을 소개한다.
+4. **제품** — 자연스럽게 [[business/products/index|Peek·ChannelDock]] 같은 제품을 소개한다.
 
 즉, *팔기 위해 쓰는 글*이 아니라 *쓰다 보니 신뢰가 쌓이고 그 끝에 제품이 있는* 순서입니다.
 
 ## 회사
 
-저는 **REUEL MASION** 의 이름으로 AI를 활용한 제품과 서비스를 만듭니다. 자세한 회사·산업 리서치는 [[company-intel/index|회사 인텔]] 허브에 정리합니다.
+저는 **REUEL MASION** 의 이름으로 AI를 활용한 제품과 서비스를 만듭니다. 자세한 회사·산업 리서치는 [[business/company-intel/index|회사 인텔]] 허브에 정리합니다.
 
 ## 연락 · 구독
 

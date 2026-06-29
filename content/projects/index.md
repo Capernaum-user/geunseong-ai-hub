@@ -5,6 +5,7 @@ tags:
   - 프로젝트
   - visibility/public
   - type/index
+  - has-diagram
 created: 2026-06-28
 updated: 2026-06-28
 draft: false
@@ -14,6 +15,21 @@ summary: "직접 만든 것들을 모아 둔 포트폴리오 허브 — 데스�
 # 프로젝트
 
 > 강의에서 다루는 방법론을 말로만 두지 않으려고, 필요할 때마다 직접 만들어 본 것들입니다. 화려한 출시작이 아니라 **내 작업에서 출발한 실물 기록**입니다. 각 케이스는 무엇을 왜 만들었고, 어떤 스택으로, 지금 어디까지 왔는지를 과장 없이 정리합니다.
+
+## 쉽게 말하면
+
+> **한마디로:** 강의에서 다루는 방법론을 말로만 두지 않으려고 **직접 만들어 본 것들의 모음**입니다. 화려한 출시작이 아니라 솔직한 케이스스터디입니다.
+
+다섯 갈래로 나뉩니다 — 데스크톱 앱, 노트 플러그인, 웹·3D, AI 프레임워크, 교육·기획.
+
+```mermaid
+flowchart TD
+    P[프로젝트 포트폴리오] --> A[데스크톱 앱]
+    P --> B[노트 플러그인]
+    P --> C[웹·3D]
+    P --> D[AI 프레임워크]
+    P --> E[교육·기획]
+```
 
 ## 데스크톱 앱
 
@@ -43,12 +59,21 @@ summary: "직접 만든 것들을 모아 둔 포트폴리오 허브 — 데스�
 
 ## 대표 제품
 
-포트폴리오 중 제품으로 다듬고 있는 두 가지는 [[products/index|제품]] 허브에서 따로 다룹니다.
+포트폴리오 중 제품으로 다듬고 있는 두 가지는 [[business/products/index|제품]] 허브에서 따로 다룹니다.
 
 - [[peek|Peek]] — AI 작업 상태를 화면 구석에 항상 보이게 띄우는 데스크톱 위젯.
 - [[channeldock|ChannelDock]] — 여러 SNS에 한 번에 기획·예약·발행하는 SNS 발행 플랫폼.
 
 ## 함께 보기
 
-- [[products/index|제품]] — 위 프로젝트 중 제품화 단계로 넘어간 결과물.
-- [[agents/index|AI 에이전트]] · [[harness/index|하네스 엔지니어링]] — 이 프로젝트들에 적용한 운영 방법론.
+- [[business/products/index|제품]] — 위 프로젝트 중 제품화 단계로 넘어간 결과물.
+- [[agents-harness/agents/index|AI 에이전트]] · [[agents-harness/harness-intro/index|하네스 엔지니어링]] — 이 프로젝트들에 적용한 운영 방법론.
+
+<!-- auto-children -->
+
+## 분류
+
+- [[projects/systems/index|운영·지식 시스템]] — 멀티-AI 운영 콘솔과 로컬 지식 시스템.
+- [[projects/apps-plugins/index|앱·플러그인]] — 데스크톱 앱과 Obsidian·tmux 플러그인.
+- [[projects/web-visual/index|웹·비주얼]] — WebGL 갤러리·디자인 시스템·3D 데모.
+- [[projects/business-design/index|비즈니스·교육 설계]] — SNS 관리·투자 교육 콘텐츠 설계.

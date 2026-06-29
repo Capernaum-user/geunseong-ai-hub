@@ -25,11 +25,13 @@ import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import Nav from "./Nav"
 import HubGrid from "./HubGrid"
+import HeroArt from "./HeroArt"
 
 export {
   ArticleTitle,
   Nav,
   HubGrid,
+  HeroArt,
   Content,
   TagContent,
   FolderContent,

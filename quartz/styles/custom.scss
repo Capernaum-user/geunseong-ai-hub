@@ -21,6 +21,114 @@ html:root {
 // 각 카드의 좌측 bar 색은 HubGrid 컴포넌트가 인라인 CSS 변수(--bar)로 주입한다.
 // (.hub-card::before { background: var(--bar, ...) } 가 이를 사용)
 
+// ── 홈 히어로 아트 (Knowledge Garden — 애니메이션 SVG, 전체폭) ──────
+// 투명 배경 SVG. 색·선·별·움직임은 아래 변수/키프레임(원본 kg.css 이식)이 구동한다.
+// 컨테이너 밖으로 breakout 시켜 화면 전체 폭으로 펼친다(상단·좌우 여백을 채움).
+// 전체 화면 고정 배경(콘텐츠 뒤). body(var(--light)) 위, 콘텐츠 아래에 깔린다.
+// 콘텐츠 컨테이너(.page/.center/article)는 투명이라 아트가 뒤로 비친다.
+.hero-art {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.5; // 가독성 위해 은은하게(다크는 아래에서 약간 진하게)
+}
+.hero-art .kg {
+  display: block;
+  width: 100% !important;
+  height: 100% !important; // viewport 전체 cover(중앙 슬라이스 크롭)
+}
+:root[saved-theme="dark"] .hero-art {
+  opacity: 0.72;
+}
+
+// 색 변수 (라이트 기본) — 이게 없으면 선/흐름/별이 안 보인다
+.kg {
+  --line: rgba(27, 36, 64, 0.4);
+  --stem: rgba(27, 36, 64, 0.58);
+  --neural: rgba(27, 36, 64, 0.2);
+  --flow: rgba(27, 36, 64, 0.52);
+  --glow-op: 0.3;
+  --rim: rgba(27, 36, 64, 0.13);
+  --shadow-op: 0.13;
+  --plane: rgba(255, 255, 255, 0.34);
+  --plane-edge: rgba(255, 255, 255, 0.6);
+  --bokeh-op: 0.28;
+  --halo: rgba(244, 231, 206, 0.28);
+  --halo2: rgba(203, 227, 244, 0.16);
+  --starfield: rgba(27, 36, 64, 0.16);
+}
+// Quartz 다크 토글 → 야간 팔레트(선/흐름이 빛남)
+:root[saved-theme="dark"] .kg {
+  --line: rgba(206, 222, 245, 0.4);
+  --stem: rgba(214, 228, 248, 0.5);
+  --neural: rgba(198, 214, 240, 0.2);
+  --flow: rgba(223, 236, 255, 0.85);
+  --glow-op: 0.6;
+  --rim: rgba(255, 255, 255, 0.12);
+  --shadow-op: 0;
+  --plane: rgba(255, 255, 255, 0.035);
+  --plane-edge: rgba(255, 255, 255, 0.1);
+  --bokeh-op: 0.26;
+  --halo: rgba(120, 150, 210, 0.12);
+  --halo2: rgba(170, 150, 220, 0.1);
+  --starfield: rgba(214, 228, 248, 0.22);
+}
+// 애니메이션 (원본 kg.css 이식)
+.kg .flow {
+  stroke-dasharray: 1.6 17;
+  stroke-linecap: round;
+  animation: kg-flow var(--dur, 9s) linear infinite;
+}
+.kg .halo {
+  animation: kg-tw var(--tw, 7s) ease-in-out infinite var(--dl, 0s);
+}
+.kg .orb {
+  animation: kg-float var(--fl, 13s) ease-in-out infinite var(--dl, 0s);
+}
+.kg .bokeh {
+  animation: kg-drift var(--bk, 32s) ease-in-out infinite var(--dl, 0s);
+}
+@keyframes kg-flow {
+  to {
+    stroke-dashoffset: -205;
+  }
+}
+@keyframes kg-tw {
+  0%,
+  100% {
+    opacity: var(--glow-op);
+  }
+  50% {
+    opacity: calc(var(--glow-op) + 0.16);
+  }
+}
+@keyframes kg-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(var(--amp, -5px));
+  }
+}
+@keyframes kg-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(var(--dx, 9px), var(--dy, -13px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kg * {
+    animation: none !important;
+  }
+}
+
 // ── 홈 히어로 ──────────────────────────────────────────────────────
 .home-hero {
   margin: 0.5rem 0 2.75rem;
@@ -83,8 +191,8 @@ html:root {
 // ── 허브 그리드 ────────────────────────────────────────────────────
 .hub-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
-  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  gap: 1rem;
   margin: 1.5rem 0 2rem;
   padding: 0;
   list-style: none;
@@ -92,83 +200,134 @@ html:root {
 
 .hub-card {
   position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
-  gap: 0.32rem;
-  padding: 1.15rem 1.2rem 1.2rem 1.45rem;
-  background: var(--light);
-  border: 1px solid var(--lightgray);
-  border-radius: 12px;
+  gap: 0.3rem;
+  min-width: 0;
+  // 좌측 색 막대는 box-model border-left 로 둔다(가상요소 X).
+  // 텍스트는 padding 안쪽이라 막대에 절대 가려지지 않는다.
+  padding: 1.25rem 1.4rem 1.3rem 1.35rem;
+  background: color-mix(in srgb, var(--bar, var(--secondary)) 6%, var(--light));
+  border: 1px solid color-mix(in srgb, var(--bar, var(--secondary)) 22%, var(--lightgray));
+  border-left: 5px solid var(--bar, var(--secondary));
+  border-radius: 14px;
   overflow: hidden;
   text-decoration: none;
   color: var(--darkgray);
   font-weight: 400;
   transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease;
+    transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
   animation: hub-rise 0.5s ease both;
 
-  // 좌측 컬러 bar
-  &::before {
+  // 우상단 컬러 글로우 (hover 시 은은하게 떠오름)
+  &::after {
     content: "";
     position: absolute;
-    inset: 0 auto 0 0;
-    width: 5px;
-    background: var(--bar, var(--secondary));
+    top: -45%;
+    right: -25%;
+    width: 65%;
+    height: 130%;
+    background: radial-gradient(circle, var(--bar, var(--secondary)) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+    z-index: -1;
   }
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--dark) 45%, transparent);
-    border-color: color-mix(in srgb, var(--bar, var(--secondary)) 55%, var(--lightgray));
+    transform: translateY(-5px);
+    background: color-mix(in srgb, var(--bar, var(--secondary)) 13%, var(--light));
+    border-color: color-mix(in srgb, var(--bar, var(--secondary)) 60%, var(--lightgray));
+    box-shadow: 0 16px 30px -16px color-mix(in srgb, var(--bar, var(--secondary)) 70%, transparent);
     color: var(--darkgray);
   }
+  &:hover {
+    border-left-color: var(--bar, var(--secondary));
+  }
+  &:hover::after {
+    opacity: 0.16;
+  }
+  &:hover .hub-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+  }
 
+  // 번호: 카테고리 색 칩
   .hub-num {
+    align-self: flex-start;
     font-family: var(--codeFont);
-    font-size: 0.74rem;
-    letter-spacing: 0.08em;
-    color: var(--gray);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--darkgray);
+    background: color-mix(in srgb, var(--bar, var(--secondary)) 18%, var(--light));
+    border-radius: 999px;
+    padding: 0.08rem 0.5rem;
   }
 
   .hub-ko {
     font-family: var(--headerFont);
     font-weight: 700;
-    font-size: 1.12rem;
+    font-size: 1.1rem;
+    line-height: 1.3;
     color: var(--dark);
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
-    gap: 0.45rem;
+    gap: 0.4rem;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
   }
 
   .hub-en {
     font-family: var(--codeFont);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--gray);
+    word-break: break-word;
   }
 
   .hub-desc {
     font-size: 0.9rem;
     line-height: 1.55;
     color: var(--darkgray);
-    margin-top: 0.15rem;
+    margin-top: 0.2rem;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
   }
 
+  // 카테고리 색 배지 (예: 비주력)
   .hub-tag {
     font-family: var(--codeFont);
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     letter-spacing: 0.06em;
-    color: var(--gray);
-    border: 1px solid var(--lightgray);
+    color: color-mix(in srgb, var(--dark) 45%, var(--bar, var(--secondary)));
+    background: color-mix(in srgb, var(--bar, var(--secondary)) 22%, var(--light));
     border-radius: 999px;
-    padding: 0.02rem 0.4rem;
+    padding: 0.04rem 0.45rem;
     transform: translateY(-1px);
   }
 
-  // 카테고리별 bar 색(--bar)은 HubGrid 가 hubs.ts 의 color 로 인라인 주입한다.
+  // 우상단 화살표 (hover 시 또렷해지고 살짝 이동)
+  .hub-arrow {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.15rem;
+    font-family: var(--codeFont);
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--bar, var(--secondary));
+    opacity: 0;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  // 카테고리별 색(--bar)은 HubGrid 가 hubs.ts 의 color 로 인라인 주입한다.
 }
 
 @keyframes hub-rise {
@@ -222,11 +381,17 @@ a:focus-visible,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hub-card {
+  .hub-card,
+  .hub-card::before,
+  .hub-card::after,
+  .hub-arrow {
     animation: none;
     transition: none;
   }
   .hub-card:hover {
+    transform: none;
+  }
+  .hub-card:hover .hub-arrow {
     transform: none;
   }
 }

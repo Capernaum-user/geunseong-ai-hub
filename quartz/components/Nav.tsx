@@ -15,6 +15,7 @@ const Nav: QuartzComponent = ({ fileData, displayClass }: QuartzComponentProps) 
             href={joinSegments(base, h.slug)}
             class={active ? "hub-nav-link active" : "hub-nav-link"}
             data-hub={h.slug}
+            style={`--hub:${h.color}`}
           >
             {h.nav}
           </a>
@@ -28,37 +29,66 @@ Nav.css = `
 .hub-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 0.55rem;
+  gap: 0.45rem 0.5rem;
   align-items: center;
   margin: 0;
 }
 .hub-nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-family: var(--codeFont);
   font-size: 0.78rem;
   letter-spacing: 0.02em;
-  color: var(--gray);
-  background: none;
-  padding: 0.18rem 0.5rem;
+  font-weight: 600;
+  color: var(--darkgray);
+  background: color-mix(in srgb, var(--hub, var(--secondary)) 8%, transparent);
+  padding: 0.26rem 0.7rem 0.26rem 0.62rem;
   border-radius: 999px;
-  border: 1px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  border: 1px solid color-mix(in srgb, var(--hub, var(--secondary)) 18%, transparent);
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.15s ease;
   white-space: nowrap;
-  font-weight: 500;
+}
+.hub-nav-link::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hub, var(--secondary));
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
 }
 .hub-nav-link:hover {
-  color: var(--secondary);
-  border-color: var(--lightgray);
+  color: var(--dark);
+  background: color-mix(in srgb, var(--hub, var(--secondary)) 18%, transparent);
+  border-color: color-mix(in srgb, var(--hub, var(--secondary)) 45%, transparent);
+  transform: translateY(-1px);
+}
+.hub-nav-link:hover::before {
+  transform: scale(1.4);
 }
 .hub-nav-link.active {
-  color: var(--secondary);
-  background: color-mix(in srgb, var(--secondary) 10%, transparent);
+  color: var(--dark);
+  background: color-mix(in srgb, var(--hub, var(--secondary)) 26%, transparent);
+  border-color: color-mix(in srgb, var(--hub, var(--secondary)) 55%, transparent);
 }
 .hub-nav-link:focus-visible {
   outline: 2px solid var(--secondary);
   outline-offset: 2px;
 }
 @media (prefers-reduced-motion: reduce) {
-  .hub-nav-link { transition: none; }
+  .hub-nav-link,
+  .hub-nav-link::before {
+    transition: none;
+  }
+  .hub-nav-link:hover {
+    transform: none;
+  }
 }
 `
 

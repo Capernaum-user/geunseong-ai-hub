@@ -33,6 +33,7 @@ const HubGrid: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
             </span>
             <span class="hub-en">{hub.en}</span>
             <span class="hub-desc">{hub.desc}</span>
+            <span class="hub-arrow" aria-hidden="true">→</span>
           </a>
         ))}
       </nav>

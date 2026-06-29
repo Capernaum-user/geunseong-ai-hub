@@ -4,7 +4,14 @@ import * as Component from "./quartz/components"
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
-  header: [Component.Nav()],
+  // 홈(index)에서만: 히어로 아트를 맨 위(Nav 앞)에 → 이미지 → 메뉴 → 본문 순서.
+  header: [
+    Component.ConditionalRender({
+      component: Component.HeroArt(),
+      condition: (page) => page.fileData.slug === "index",
+    }),
+    Component.Nav(),
+  ],
   // 홈(index)에서만 히어로 아래에 허브 카드 그리드(HubGrid)를 렌더한다.
   // 다른 페이지는 null → page-footer 영역 영향 없음.
   afterBody: [
@@ -90,5 +97,19 @@ export const defaultListPageLayout: PageLayout = {
     }),
     Component.Explorer(),
   ],
-  right: [],
+  // 카테고리/폴더·태그 페이지에도 글 페이지와 동일한 우측 사이드바를 둔다(그래프+목차+백링크).
+  right: [
+    Component.Graph({
+      localGraph: {
+        depth: 2,
+        showTags: true,
+      },
+      globalGraph: {
+        depth: -1,
+        showTags: false,
+      },
+    }),
+    Component.DesktopOnly(Component.TableOfContents()),
+    Component.Backlinks(),
+  ],
 }

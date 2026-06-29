@@ -10,13 +10,13 @@ tags:
 created: 2026-06-28
 updated: 2026-06-28
 draft: true
-summary: "[보관됨/비발행] 레거시 Hugo 발행 파이프라인 문서. 현행 Quartz 파이프라인([[obsidian/mywiki-to-quartz-pipeline]])으로 대체되었다. 발행 게이트를 통과하지 않도록 visibility/internal + draft:true 로 둔다."
+summary: "[보관됨/비발행] 레거시 Hugo 발행 파이프라인 문서. 현행 Quartz 파이프라인([[mywiki-to-quartz-pipeline]])으로 대체되었다. 발행 게이트를 통과하지 않도록 visibility/internal + draft:true 로 둔다."
 ---
 
 # MyWiki에서 Hugo 블로그로 발행하는 파이프라인
 
 > [!warning] 보관됨 (비발행)
-> 이 문서는 레거시 **Hugo** 발행 파이프라인을 설명한다. 현재 사이트는 Quartz로 발행하므로, 현행 구조는 [[obsidian/mywiki-to-quartz-pipeline|MyWiki(Obsidian)에서 Quartz로 발행하는 파이프라인]]을 참고한다. 이 노트는 `visibility/internal` + `draft: true`로 두어 사이트에 발행되지 않는다.
+> 이 문서는 레거시 **Hugo** 발행 파이프라인을 설명한다. 현재 사이트는 Quartz로 발행하므로, 현행 구조는 [[mywiki-to-quartz-pipeline|MyWiki(Obsidian)에서 Quartz로 발행하는 파이프라인]]을 참고한다. 이 노트는 `visibility/internal` + `draft: true`로 두어 사이트에 발행되지 않는다.
 
 근성쌤 지식블로그는 **위키가 원천(DB), Hugo가 발행물(렌더러)** 이라는 두 스택 분리 위에서 동작한다. 둘 사이의 "DB 연결"은 SQL 같은 런타임 연결이 아니라 **빌드타임 콘텐츠 동기화**다.
 
@@ -34,4 +34,4 @@ summary: "[보관됨/비발행] 레거시 Hugo 발행 파이프라인 문서. �
 - **추적**: 발행 원장(`.publish-manifest.json`)이 source→slug와 staleness를 기록해, 공개가 해제되면 사이트에서도 자동 언퍼블리시한다.
 - **안정성 우선**: 무거운 모션·외부위젯을 피하고 정적 산출물의 성능·안정성을 유지한다.
 
-위 흐름은 Hugo 시절 기록이다. 현행 Quartz 파이프라인은 매핑 단계를 단순화하고 `[[위키링크]]`·백링크·그래프를 그대로 살린다 — [[obsidian/mywiki-to-quartz-pipeline]] 참고.
+위 흐름은 Hugo 시절 기록이다. 현행 Quartz 파이프라인은 매핑 단계를 단순화하고 `[[위키링크]]`·백링크·그래프를 그대로 살린다 — [[mywiki-to-quartz-pipeline]] 참고.
