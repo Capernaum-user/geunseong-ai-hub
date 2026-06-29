@@ -1,15 +1,15 @@
 ---
-title: "근성쌤 · AI 지식허브"
+title: "근성 · AI 지식허브"
 enableToc: false
 tags:
   - visibility/public
   - type/index
 draft: false
-summary: "근성쌤(권태향)의 공개 AI 지식정원 홈 — 여러 AI를 규칙·역할·검증으로 묶어 끝까지 일하게 만드는 구조를 기록하는 9개 허브의 입구."
+summary: "근성(권태향)의 공개 AI 지식정원 홈 — 여러 AI를 규칙·역할·검증으로 묶어 끝까지 일하게 만드는 구조를 기록하는 9개 허브의 입구."
 ---
 
 <section class="home-hero">
-<p class="eyebrow">근성쌤 · AI KNOWLEDGE HUB</p>
+<p class="eyebrow">근성 · AI KNOWLEDGE HUB</p>
 <h1>AI를 다루는 사람의 <span class="hl">〈지식 정원〉</span></h1>
 <p class="lead">모델 하나를 똑똑하게 만드는 일보다, 여러 AI를 규칙·역할·검증으로 묶어 끝까지 일하게 만드는 구조를 공개로 기록합니다.</p>
 <ul class="hero-meta">
