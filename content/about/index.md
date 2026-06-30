@@ -35,19 +35,15 @@ flowchart LR
 - **발행물(렌더러)**: 이 Quartz 사이트
 - **원칙**: 지식은 위키에만 쌓고, 노출은 태그로만 통제한다(원본 보존, 역기록 금지)
 
-## 무엇을 다루나 — 9개 허브
+## 무엇을 다루나 — 5개 대분류
 
-기록은 다음 아홉 갈래로 정리됩니다.
+기록은 다섯 갈래(대분류)로 정리되고, 각 대분류 안에 다시 중분류가 있습니다.
 
-- **[[agents-harness/agents/index|AI 에이전트]]** — 자율 에이전트의 역할·한계·의사결정·에스컬레이션
-- **[[agents-harness/harness-intro/index|하네스 엔지니어링]]** — 여러 AI를 규칙·검증·핸드오프로 묶는 운영 구조
-- **[[knowledge/obsidian/index|Obsidian × 생성형 AI]]** — 지식관리와 생성형 AI의 결합, RAG와 장기 기억
-- **[[knowledge/local-llm/index|로컬 LLM]]** — 로컬에서 돌리는 모델, 프라이버시와 비용
-- **[[business/startup-ai/index|창업 × AI]]** — 신생 기업 관점에서 AI를 도구로 쓰는 법
-- **[[business/company-intel/index|회사 인텔]]** — REUEL MASION 및 산업·회사 리서치 기록
-- **[[business/products/index|제품]]** — Peek, ChannelDock 등 만들고 있는 것들
-- **[[projects/index|프로젝트]]** — 직접 만든 것들(데스크톱앱·플러그인·웹/3D·AI 도구)
-- **[[business/ai-interior/index|AI 인테리어]]** — AI를 활용한 공간·인테리어 실험(비주력)
+- **[[agents-harness/index|에이전트 & 하네스]]** — 에이전트 역할·카탈로그부터 하네스 운영 규칙·작업/품질·복구·연속성까지 (핵심 전문성)
+- **[[knowledge/index|지식관리 & 도구]]** — Obsidian × 생성형 AI · 발행 파이프라인 · 로컬 LLM
+- **[[business/index|창업 & 비즈니스]]** — 창업 × AI · 회사·마케팅 인텔(REUEL MASION) · 제품(Peek·ChannelDock) · AI 인테리어(비주력)
+- **[[projects/index|프로젝트]]** — 운영·지식 시스템 · 앱·플러그인 · 웹·비주얼 · 비즈니스·교육 설계
+- 그리고 지금 보고 계신 **소개**.
 
 ## 왜 공개하나 — 기록에서 제품까지
 
