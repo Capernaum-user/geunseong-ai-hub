@@ -58,11 +58,3 @@ flowchart LR
 1. **관찰** — [[instagram-influencer-watch|인플루언서 관찰]]로 벤치마크 풀을 만든다.
 2. **채널 선택** — [[ad-media-catalog|광고매체 카탈로그]]로 어디에 예산을 쓸지 정한다.
 3. **실행** — [[instagram-growth-playbook|성장 플레이북]]으로 콘텐츠와 협업을 굴린다.
-
-<!-- auto-children -->
-
-## 이 분류의 문서
-
-- [[ad-media-catalog|광고매체 카탈로그]]
-- [[instagram-growth-playbook|인스타 성장 플레이북]]
-- [[instagram-influencer-watch|인스타 인플루언서 관찰]]

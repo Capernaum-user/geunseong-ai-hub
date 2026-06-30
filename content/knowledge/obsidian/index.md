@@ -80,11 +80,3 @@ flowchart LR
 
 - [[knowledge/local-llm/index|로컬 LLM]] — 임베딩·추론을 로컬에서 돌려 데이터 유출면을 줄인다.
 - [[agents-harness/agents/index|AI 에이전트]] — Vault를 읽고 쓰는 외부 에이전트 설계.
-
-<!-- auto-children -->
-
-## 이 분류의 문서
-
-- [[ai-plugins|Obsidian + 생성형 AI 플러그인 스택]]
-- [[obsidian-vault|Obsidian 볼트 (볼트 루트)]]
-- [[quartz-hub-manager|Quartz Hub Manager — 쉽게 보는 사용설명서]]

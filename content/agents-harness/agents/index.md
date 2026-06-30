@@ -67,11 +67,3 @@ graph LR
 ## 관련 허브
 
 - [[harness-engineering|하네스 엔지니어링]] — 에이전트를 안전하게 운영하는 거버넌스 토대
-
-<!-- auto-children -->
-
-## 이 분류의 문서
-
-- [[agent-catalog|에이전트 카탈로그 — 무엇이 있고, 어떻게, 왜 쓰는가]]
-- [[agent-decision-escalation|에이전트 의사결정과 에스컬레이션]]
-- [[ai-agent-roles|AI 에이전트 역할 (Claude·Gemini·Codex)]]

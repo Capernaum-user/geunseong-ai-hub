@@ -83,9 +83,3 @@ flowchart TD
 - [[knowledge/obsidian/index|Obsidian × 생성형 AI]] — 로컬 모델을 Vault 지식베이스에 연결
 - [[agents-harness/harness-intro/index|하네스 엔지니어링]] — 다중 AI 협업·검증 거버넌스
 - [[agents-harness/agents/index|AI 에이전트]] — 로컬·클라우드 모델을 도구로 쓰는 에이전트 설계
-
-<!-- auto-children -->
-
-## 이 분류의 문서
-
-- [[ollama-setup|Ollama로 로컬 모델 구성·연결·프로바이더 선택]]

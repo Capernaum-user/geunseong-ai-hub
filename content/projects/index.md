@@ -68,12 +68,3 @@ flowchart TD
 
 - [[business/products/index|제품]] — 위 프로젝트 중 제품화 단계로 넘어간 결과물.
 - [[agents-harness/agents/index|AI 에이전트]] · [[agents-harness/harness-intro/index|하네스 엔지니어링]] — 이 프로젝트들에 적용한 운영 방법론.
-
-<!-- auto-children -->
-
-## 분류
-
-- [[projects/systems/index|운영·지식 시스템]] — 멀티-AI 운영 콘솔과 로컬 지식 시스템.
-- [[projects/apps-plugins/index|앱·플러그인]] — 데스크톱 앱과 Obsidian·tmux 플러그인.
-- [[projects/web-visual/index|웹·비주얼]] — WebGL 갤러리·디자인 시스템·3D 데모.
-- [[projects/business-design/index|비즈니스·교육 설계]] — SNS 관리·투자 교육 콘텐츠 설계.

@@ -26,12 +26,14 @@ import ConditionalRender from "./ConditionalRender"
 import Nav from "./Nav"
 import HubGrid from "./HubGrid"
 import HeroArt from "./HeroArt"
+import CategoryCards from "./CategoryCards"
 
 export {
   ArticleTitle,
   Nav,
   HubGrid,
   HeroArt,
+  CategoryCards,
   Content,
   TagContent,
   FolderContent,

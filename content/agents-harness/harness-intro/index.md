@@ -123,10 +123,3 @@ graph TD
 
 > 이 허브는 **고정된 정답집이 아니다.** 더 좋은 하네스 엔지니어링 — 새로운 평가(eval) 방식, 검증 패턴, 도구 권한 모델, 복구 전략 — 이 검증되면 이 페이지에 노트를 계속 추가한다.
 > 규칙은 [[change-history-ratchet|래칫]] 원칙에 따라 **삭제하지 않고 통합**하며, 모든 의미 있는 변경은 [[harness-change-history|변경 이력]]에 남긴다.
-
-<!-- auto-children -->
-
-## 이 분류의 문서
-
-- [[ai-master-constitution|AI 마스터 헌법]]
-- [[harness-engineering|하네스 엔지니어링 개요]]

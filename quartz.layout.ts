@@ -19,6 +19,8 @@ export const sharedPageComponents: SharedLayout = {
       component: Component.HubGrid(),
       condition: (page) => page.fileData.slug === "index",
     }),
+    // 폴더 랜딩(대분류/중분류)에서 자식을 카드로 렌더(컴포넌트가 자체 가드). 일반 노트·홈에서는 null.
+    Component.CategoryCards(),
   ],
   footer: Component.Footer({
     links: {
