@@ -10,7 +10,11 @@ const config: QuartzConfig = {
   configuration: {
     pageTitle: "근성 · AI 지식허브",
     pageTitleSuffix: "",
-    enableSPA: true,
+    // SPA 비활성: GitHub Pages 서브패스(/geunseong-ai-hub/)에서 SPA가 폴더 주소를
+    // 끝슬래시 없이 유지하면 폴더 랜딩의 상대링크가 베이스 밖으로 새어 "There isn't a
+    // GitHub Pages site here" 404가 난다. SPA를 끄면 풀 내비게이션 → GitHub가 끝슬래시로
+    // 301 리다이렉트 → 상대경로가 항상 정상 해석된다.
+    enableSPA: false,
     enablePopovers: true,
     // 분석 비활성(null). Plausible은 GH Pages 서브패스(/geunseong-ai-hub/)에서
     // 도메인 스코프가 어긋나 이벤트가 조용히 0건 수집될 수 있어 보류한다.
