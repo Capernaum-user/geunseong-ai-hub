@@ -5,7 +5,7 @@ tags:
   - visibility/public
   - type/index
 draft: false
-summary: "근성(권태향)의 공개 AI 지식정원 홈 — 여러 AI를 규칙·역할·검증으로 묶어 끝까지 일하게 만드는 구조를 기록하는 9개 허브의 입구."
+summary: "근성(권태향)의 공개 AI 지식정원 홈 — 여러 AI를 규칙·역할·검증으로 묶어 끝까지 일하게 만드는 구조를 기록하는 5개 대분류의 입구."
 ---
 
 <section class="home-hero">
